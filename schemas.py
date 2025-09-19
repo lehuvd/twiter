@@ -18,6 +18,7 @@ class TweetUpdate(BaseModel):
 class TweetOut(TweetBase):
     id: int
     created: datetime
+    likes: int 
 
     class Config:
         from_attributes = True

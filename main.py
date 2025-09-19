@@ -1,15 +1,16 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import models
 from database import engine, get_db
-from routers import users, tweets
+from routers import users, tweets, auth
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 app.include_router(users.router)
 app.include_router(tweets.router)
+app.include_router(auth.router)
 
 
 app.add_middleware(

@@ -1,13 +1,15 @@
-from fastapi import FastAPI, HTTPException, Depends, APIRouter
+from fastapi import HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session
 import models
-from database import engine, get_db
+from database import get_db
 import schemas
 
 router = APIRouter(
     prefix="/tweet",
     tags=["Tweets"]
 )
+
+logged_in = None
 
 @router.post("/", status_code=201)
 async def tweet(tweet: schemas.TweetCreate, db: Session = Depends(get_db)):
